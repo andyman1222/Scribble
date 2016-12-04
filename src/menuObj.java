@@ -13,24 +13,28 @@ import javax.swing.JSlider;
 import javax.swing.event.ChangeEvent;
 import javax.swing.event.ChangeListener;
 
-public class menuObj extends JPanel implements ActionListener{
+public class menuObj implements ActionListener{
 	
 	public boolean limitMode = false, mirrorMode = false;
 	private static JCheckBox limitModeB = new JCheckBox();
 	private static JCheckBox mirrorModeB = new JCheckBox();
 	public static JSlider number = new JSlider(0,7);
-	public static JSlider speedSlider = new JSlider(0,100);
+	public static JSlider speedSlider = new JSlider(0,250000000);
 	public static JSlider lengthSlider = new JSlider(10,50);
 	public static JSlider curveSlider = new JSlider(2,10);
 	public static JSlider distanceSlider = new JSlider(1,100);
+	public static JSlider transparency = new JSlider(10,255);
 	static JButton clear = new JButton("clear screen");
 	private static changeListenerSlider sliderListener = new changeListenerSlider();
 	protected static int numberOfDrawers = 7;
 	static JFrame menuFrame = new JFrame("");
 	JPanel panel = new JPanel();
+	
+	
 	public menuObj(){
 		number.setValue(8);
-		speedSlider.setValue((int)Math.round((Math.random()*100)));
+		transparency.setValue(255);
+		speedSlider.setValue((int)Math.round((Math.random()*250000000)));
 		lengthSlider.setValue((int)Math.round((Math.random()*50)+10));
 		curveSlider.setValue((int)Math.round((Math.random()*10)+2));
 		distanceSlider.setValue((int)Math.round((Math.random()*100)+1));
@@ -64,12 +68,19 @@ public class menuObj extends JPanel implements ActionListener{
 		panel.add(limitModeB, right);
 		panel.add(new JLabel("length of drawers (if mirror mode checked): "), left);
 		panel.add(lengthSlider, right);
+		panel.add(new JLabel("Transparency of lines: "), left);
+		panel.add(transparency, right);
 		panel.add(clear, right);
-		
+		panel.setIgnoreRepaint(true);
 		menuFrame.setVisible(true);
 		menuFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		menuFrame.getContentPane().add(panel);
 		menuFrame.toFront();
+	}
+	
+	public void colorMenu()
+	{
+		
 	}
 	
 	public void actionPerformed(ActionEvent e) {

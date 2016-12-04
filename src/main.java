@@ -1,6 +1,5 @@
 import java.awt.Color;
 import java.awt.*;
-
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 
@@ -16,7 +15,6 @@ public class main extends JPanel{
 	static menuObj menu = new menuObj();
 	static JFrame frame = new JFrame();
 	public static void main(String[] args){
-		
 		frame.setSize(1000, 1000);
 		frame.add(new main());
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -29,31 +27,34 @@ public class main extends JPanel{
 	protected static int width, height;
 	Point oldLocation = getLocation();
 	public void paint(Graphics g){
-		width = getWidth();
-		height = getHeight();
-		if(firstTime){
+		setIgnoreRepaint(true);
+		//while(true){
+			width = getWidth();
+			height = getHeight();
+			if(firstTime){
+				
+				g.setColor(Color.BLACK);
+				g.fillRect(0, 0, width, height);
+				firstTime = false;
+			}
 			
-			g.setColor(Color.BLACK);
-			g.fillRect(0, 0, width, height);
-			firstTime = false;
-		}
-		
-		if((oldWidth != getWidth())||(oldHeight != getHeight())||(!oldLocation.equals(getLocationOnScreen()))){
-			firstTime = true;
-			oldWidth = getWidth();
-			oldHeight = getHeight();
-			oldLocation = getLocationOnScreen();
-		}
-		
-		setSize(oldWidth,oldHeight);
-		try {
-			Thread.sleep(menuObj.speedSlider.getValue());
-		}
-		catch(Exception ex) {
-			System.out.println("Error!");
-		}
-		draw(g);
-		repaint();	
+			if((oldWidth != getWidth())||(oldHeight != getHeight())||(!oldLocation.equals(getLocationOnScreen()))){
+				firstTime = true;
+				oldWidth = getWidth();
+				oldHeight = getHeight();
+				oldLocation = getLocationOnScreen();
+			}
+			
+			setSize(oldWidth,oldHeight);
+			try {
+				Thread.sleep((int)(menuObj.speedSlider.getValue()/1000000),menuObj.speedSlider.getValue()%999999);
+			}
+			catch(Exception ex) {
+				System.out.println("Error!" + ex.getMessage());
+			}
+			draw(g);
+			repaint();
+		//}
 	}
 	public void draw(Graphics g){
 		//while(true){

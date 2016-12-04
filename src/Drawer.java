@@ -51,7 +51,7 @@ public class Drawer {
 		distance = (float) (main.menu.distanceSlider.getValue()*.01);
 		if(main.menu.numberOfDrawers >= number){
 			generateDirection();
-			penColor = new Color(getColorFromBase(baseColor.getRed()),getColorFromBase(baseColor.getGreen()),getColorFromBase(baseColor.getBlue()),getColorFromBase(baseColor.getAlpha()));
+			penColor = new Color(getColorFromBase(baseColor.getRed()),getColorFromBase(baseColor.getGreen()),getColorFromBase(baseColor.getBlue()),main.menu.transparency.getValue());
 			x+=(int)(xChange);
 			y+=(int)(yChange);
 			if(x>=main.width-20){
